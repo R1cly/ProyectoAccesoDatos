@@ -52,13 +52,10 @@ class ventanaEstandar():
         self.variableQuery = "USE WORLD"
         myCursor.execute(self.variableQuery)
 
-        myCursor.execute("SELECT * FROM city")
+        myCursor.execute("SELECT * FROM country")
 
         for x in myCursor:
-            boton = botonesMenu(mainHeader=self.mainWindow, inputX=10, inputY=200, comandoBoton=main, texto="Hola")
-
-
-
+            self.boton = botonesMenu(mainHeader=self.mainWindow, inputX=10, inputY=200, comandoBoton=main, texto="Hola")
 
 def helloFriend():
     print("Hello")
@@ -79,7 +76,7 @@ def main():
 if __name__ == '__main__':
     myDatabase = mysql.connector.connect(host="localhost",
                                          username="root",
-                                         password="noseaquien")
+                                         password="")
 
     myCursor = myDatabase.cursor()
 

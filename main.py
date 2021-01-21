@@ -44,7 +44,20 @@ class ventanaEstandar():
 
         for x in myCursor:
             print(x)
-            boton = botonesMenu(mainHeader=self.databaseHeader, inputX=10, inputY=200, comandoBoton=main,texto=x)
+            self.databaseVariable = x
+            boton = botonesMenu(mainHeader=self.databaseHeader, inputX=10, inputY=200, comandoBoton=self.crearDatos,texto=x)
+
+    def crearDatos(self):
+
+        self.variableQuery = "USE WORLD"
+        myCursor.execute(self.variableQuery)
+
+        myCursor.execute("SELECT * FROM city")
+
+        for x in myCursor:
+            boton = botonesMenu(mainHeader=self.mainWindow, inputX=10, inputY=200, comandoBoton=main, texto="Hola")
+
+
 
 
 def helloFriend():
@@ -66,7 +79,7 @@ def main():
 if __name__ == '__main__':
     myDatabase = mysql.connector.connect(host="localhost",
                                          username="root",
-                                         password="a")
+                                         password="noseaquien")
 
     myCursor = myDatabase.cursor()
 

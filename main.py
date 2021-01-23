@@ -26,7 +26,7 @@ class ventanaEstandar():
         self.databaseHeader.pack_propagate(False)
         self.databaseHeader.pack(side="right")
 
-        self.botonN = botonesMenu(mainHeader=self.mainHeader, inputX=10, inputY=200, comandoBoton=self.crearTablas,texto="Hola")
+        self.botonN = botonesMenu(mainHeader=self.mainHeader, inputX=10, inputY=200, comandoBoton=self.crearTablas,texto="ShowDatabases")
 
         self.mainWindow.pack_propagate(False)
         self.mainWindow.pack()
@@ -76,7 +76,7 @@ def main():
 if __name__ == '__main__':
     myDatabase = mysql.connector.connect(host="localhost",
                                          username="root",
-                                         password="")
+                                         password="noseaquien")
 
     myCursor = myDatabase.cursor()
 

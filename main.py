@@ -1,14 +1,27 @@
 import tkinter as tk
 import mysql.connector
 
+"""
+class loginUser():
+    def __init__(self, master):
 
+        self.master = master
+        self.mainLoginFrame = tk.Frame(self.master, bg="silver",width="500",height="700")
+
+        self.mainLoginFrame.pack()
+        self.mainLoginFrame.pack_propagate(False)
+"""
+
+
+# Creacion de botones estandar
 class botonesMenu():
-    def __init__(self, mainHeader, inputX, inputY, comandoBoton,texto):
+
+    def __init__(self, mainHeader, inputX, inputY, comandoBoton, texto):
         self.mainHeader = mainHeader
 
-        self.button11 = tk.Button(self.mainHeader, width="15", height="5",
-                                  command=comandoBoton,bg="blue",text=texto)
-        self.button11.pack(padx="10", pady="10")
+        self.botonMenu = tk.Button(self.mainHeader, width="15", height="5",
+                                   command=comandoBoton, bg="silver", text=texto)
+        self.botonMenu.pack(padx="10", pady="10")
 
 
 class ventanaEstandar():
@@ -21,12 +34,8 @@ class ventanaEstandar():
         self.mainHeader = tk.Frame(self.mainWindow, bg="#8CBE8D", height="1100", width="135",
                                    highlightbackground="black", highlightthickness=1.5)
 
-        self.databaseHeader = tk.Frame(self.mainWindow, width="250",height="1080")
-
-        self.databaseHeader.pack_propagate(False)
-        self.databaseHeader.pack(side="right")
-
-        self.botonN = botonesMenu(mainHeader=self.mainHeader, inputX=10, inputY=200, comandoBoton=self.crearTablas,texto="ShowDatabases")
+        self.botonN = botonesMenu(mainHeader=self.mainHeader, inputX=10, inputY=200, comandoBoton=self.crearTablas,
+                                  texto="ShowDatabases")
 
         self.mainWindow.pack_propagate(False)
         self.mainWindow.pack()
@@ -36,29 +45,31 @@ class ventanaEstandar():
 
     def crearTablas(self):
 
+        self.databaseHeader = tk.Frame(self.mainWindow, width="250", height="1080")
+        self.databaseHeader.pack_propagate(False)
+        self.databaseHeader.pack(side="right")
+
         myCursor.execute("SHOW DATABASES")
 
-        self.databaseText = tk.Label(self.databaseHeader,text="Database")
-        self.databaseText.pack(pady=10,padx=10)
+        self.databaseText = tk.Label(self.databaseHeader, text="Database")
+        self.databaseText.pack(pady=10, padx=10)
         self.databaseText.pack_propagate(False)
 
         for x in myCursor:
             print(x)
             self.databaseVariable = x
-            boton = botonesMenu(mainHeader=self.databaseHeader, inputX=10, inputY=200, comandoBoton=self.crearDatos,texto=x)
+            boton = botonesMenu(mainHeader=self.databaseHeader, inputX=10, inputY=200, comandoBoton=self.crearDatos,
+                                texto=x)
 
     def crearDatos(self):
 
-        self.variableQuery = "USE WORLD"
-        myCursor.execute(self.variableQuery)
+        variableQuery = "USE WORLD"
+        myCursor.execute(variableQuery)
 
-        myCursor.execute("SELECT * FROM country")
+        myCursor.execute("SELECT name FROM country")
 
         for x in myCursor:
-            self.boton = botonesMenu(mainHeader=self.mainWindow, inputX=10, inputY=200, comandoBoton=main, texto="Hola")
-
-def helloFriend():
-    print("Hello")
+            boton = botonesMenu(mainHeader=self.mainWindow, inputX=10, inputY=200, comandoBoton=main, texto=x)
 
 
 def main():
@@ -66,9 +77,9 @@ def main():
     root.geometry("1600x900")
     root.title("Administracion de centros educativos")
 
+    #  = loginUser(root) Not in use
 
     app = ventanaEstandar(root)
-    #ventanaEstandar.crearTablas(app)
 
     root.mainloop()
 
